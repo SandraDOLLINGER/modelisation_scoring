@@ -17,9 +17,9 @@ app = FastAPI()
 #meilleur_seuil_value = 0.5050505050505051
 
 
-# @app.get("/")
-# def read_root():
-#     return {"message": "Bienvenue sur l'API de prédiction Prêt à dépenser"}
+@app.get("/")
+def read_root():
+    return {"message": "Bienvenue sur l'API de prédiction Prêt à dépenser"}
 
 @app.get("/test")
 def test_route():
