@@ -25,8 +25,8 @@ def read_root():
 def test_route():
     return{"message": "hello world"}
 
-# @app.get("/predict/{client_id}")
-# async def predict(client_id: int):
+@app.get("/predict/{client_id}")
+async def predict(client_id: int):
 #     """
 #         Fonction de prédiction pour un client spécifique basé sur son ID.
 #     param :
@@ -36,6 +36,7 @@ def test_route():
 #         client_pred : prédiction binaire (0 ou 1)
 #     """
 #     # Vérifier si l'ID client existe dans le DataFrame
+    return{"message": "hello world"}
 #     if client_id in df_cleaned.index:
 #         # Sélectionner les données du client
 #         X_client = df_cleaned.loc[client_id]
