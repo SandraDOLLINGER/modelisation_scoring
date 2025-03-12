@@ -28,7 +28,7 @@ def test_route():
     return{"message": "hello world"}
 
 @app.get("/predict/{client_id}")
-async def predict(client_id: int):
+def predict(client_id: int):
     """
         Fonction de prédiction pour un client spécifique basé sur son ID.
     param :
@@ -44,8 +44,13 @@ async def predict(client_id: int):
         # Supprimer la colonne TARGET si elle est présente
         if 'TARGET' in X_client.index:
             X_client = X_client.drop('TARGET')
-        # Préparer les données (reshape et normalisation)
+        # Préparer les données (reshape)
         X_client = X_client.values.reshape(1, -1)  # Pour adapter à l'entrée du modèle
+
+        # convertir X_client en Dataframe avec les colonnes d'origine
+        X_client = pd.DataFrame(X_client, columns=df_sample.columns.drop('TARGET'))
+
+        # normalisation
         X_client_scaled = scaler.transform(X_client)
 
         # Prédiction des probabilités et de la classe
