@@ -23,6 +23,15 @@ from .fonction_api_prediction import app
 client = TestClient(app)
 
 def test_prediction_du_client_127494():
+  """
+  Teste la prédiction pour un client connu (ID : 127494).
+  Vérifie que :
+  - L'API retourne un code HTTP 200 (succès).
+  - La réponse contient bien les données attendues :
+    - L'ID du client.
+    - La classe prédite (0 = remboursement sans incident).
+    - La probabilité associée, arrondie à 8 décimales.
+  """
   response = client.get("/predict/127494")
   assert response.status_code == 200
   response_data = response.json()
@@ -37,6 +46,12 @@ def test_prediction_du_client_127494():
 
 
 def test_client_inconnu_326316():
+  """
+  Teste la prédiction pour un client inconnu (ID : 326316).
+  Vérifie que :
+  - L'API retourne un code HTTP 404 (non trouvé), 
+    indiquant que le client n'est pas dans la base.
+  """
   response = client.get("/predict/326316")
   assert response.status_code == 404
 
